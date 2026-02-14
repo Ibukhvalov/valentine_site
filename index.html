@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Valentine 💘</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Bolgen';
+  src: url('bolgen.ttf') format('truetype');
+}
+
+/* ================= COLORS ================= */
+:root {
+    --bg-color: #F0DFAD;      /* soft creamy yellow */
+    --title-color: #7a9b57;  /* muted leafy green */
+    --yes-color: #a7c957;    /* fresh pastel green */
+    --no-color: #e9edc9;     /* pale yellow */
+    --text-color: #4f5d2f;
+}
+/* ========================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+
+.lilita-one-regular {
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bolgen', cursive;
+  overflow: hidden;
+}
+
+/* ---- Main Card ---- */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+/* ---- Title ---- */
+h1 {
+  font-size: 3rem;
+  color: var(--title-color);
+  animation: twitch 2.5s infinite steps(1);
+  text-align: center;
+  font-family: 'Bolgen', cursive;
+}
+
+/* Twitch animation */
+@keyframes twitch {
+  0%   { transform: rotate(0deg) translate(0, 0); }
+  20%  { transform: rotate(1deg) translate(2px, -1px); }
+  40%  { transform: rotate(-1deg) translate(-2px, 1px); }
+  60%  { transform: rotate(0.5deg) translate(1px, 2px); }
+  80%  { transform: rotate(-0.5deg) translate(-1px, -2px); }
+  100% { transform: rotate(0deg) translate(0, 0); }
+}
+
+/* ---- Image ---- */
+.center-image img {
+  width: 280px;
+  max-width: 80vw;
+}
+
+/* ---- Buttons ---- */
+.buttons {
+  display: flex;
+  gap: 25px;
+  font-family: var(--button-font);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+button {
+  font-family: 'Lilita One', cursive;
+  letter-spacing: 0.5px;
+  padding: 12px 28px;
+  font-size: 1.5rem;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#yes {
+  background: var(--yes-color);
+  color: white;
+}
+
+#yes:hover {
+  transform: scale(1.1);
+}
+
+#no {
+  background: var(--no-color);
+  color: var(--text-color);
+  position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Will you be my valentine?</h1>
+
+  <div class="center-image">
+    <img src="image.jpg" alt="Valentine image">
+  </div>
+
+  <div class="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+
+noBtn.addEventListener("mouseenter", () => {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+  noBtn.style.position = "fixed";
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
+});
+
+noBtn.addEventListener("click", () => {
+  const currentScale =
+    noBtn.style.transform.match(/scale\(([^)]+)\)/)?.[1] || 1;
+  const newScale = Math.max(0.4, currentScale - 0.1);
+  noBtn.style.transform = `scale(${newScale})`;
+});
+
+document.getElementById("yes").addEventListener("click", () => {
+  document.body.innerHTML = `
+    <h1 style="animation:none; color:var(--title-color);">
+      Yay!! 💕💍
+    </h1>
+  `;
+});
+</script>
+
+</body>
+</html>
